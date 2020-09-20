@@ -23,14 +23,13 @@ public class Main extends Application {
         final int screenWidth = 1200;
         //BG
         Rectangle bg1 = new Rectangle(0,0, (int)(screenWidth/2), screenHeight);
-        bg1.setFill(Color.GRAY);
+        bg1.setFill(Color.LIGHTGRAY);
         Rectangle bg2 = new Rectangle((int)(screenWidth/2), 0, (int)(screenWidth/2), screenHeight);
         bg2.setFill(Color.BLACK);
         //birds
         //stars
         //houses
-        House house1 = new House((int)(screenWidth/4) - 105, (int)(screenHeight/2.5));
-        House house2 = new House((int)( 3 * screenWidth/4) - 105, (int)(screenHeight/2.5));
+        House house = new House();
         //sun
         Circle sun = new Circle(((int)(screenWidth/2) - 100),100,35,Color.YELLOW);
         //rays
@@ -52,7 +51,13 @@ public class Main extends Application {
         // text
 
 
-        Group gp = new Group(bg1, bg2, sun, moon, house1.create(), house2.create());
+        Group gp = new Group(bg1,
+                bg2,
+                sun,
+                moon,
+                house.create((int)(screenWidth/4) - 105, (int)(screenHeight/2.5), Color.DARKGRAY),
+                house.create((int)( 3 * screenWidth/4) - 105, (int)(screenHeight/2.5), Color.BLACK)
+        );
 
         pstage.setScene(new Scene(gp));
         pstage.setTitle("Title!");
