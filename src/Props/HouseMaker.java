@@ -1,12 +1,11 @@
 package Props;
 
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 
-public class House extends Node {
+public class HouseMaker {
 
     public Group create(int x, int y, Color shadowcolor){
         //constant
