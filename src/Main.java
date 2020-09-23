@@ -1,6 +1,8 @@
 import Props.BirdMaker;
 import Props.HouseMaker;
 import Props.StarMaker;
+import javafx.animation.FillTransition;
+import javafx.animation.KeyFrame;
 import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -41,7 +43,11 @@ public class Main extends Application {
         //birds
         BirdMaker bm = new BirdMaker();
 
-        Group bribs = new Group(bm.create(screenWidth/2, screenHeight/2));
+        Group bribs = new Group(
+                bm.create(screenWidth/4, screenHeight/8),
+                bm.create(screenWidth/8, screenHeight / 4)
+        );
+
 
         //stars
         StarMaker starMaker = new StarMaker();
@@ -63,6 +69,12 @@ public class Main extends Application {
         int xSun =((int)(4 * screenWidth/10));
         int ySun =(int)(screenHeight / 6);
         Circle sun = new Circle(xSun, ySun, radiusSun, Color.YELLOW);
+
+        FillTransition fl = new FillTransition(Duration.seconds(2), sun);
+        fl.setToValue(Color.ORANGE);
+        fl.setAutoReverse(true);
+        fl.setCycleCount(Timeline.INDEFINITE);
+        fl.play();
 
         //rays
         int raysize = 60;

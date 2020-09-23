@@ -49,7 +49,7 @@ public class StarMaker {
         //fade transition
         FadeTransition fade = new FadeTransition(Duration.seconds(duration), star);
         fade.setFromValue(1.0);
-        fade.setToValue(0.2);
+        fade.setToValue(0.1);
         fade.setAutoReverse(true);
         fade.setCycleCount(Animation.INDEFINITE);
         fade.playFromStart();
