@@ -2,10 +2,8 @@ package Props;
 
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
-import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Polyline;
 import javafx.util.Duration;
 
 
@@ -13,11 +11,11 @@ public class StarMaker {
 
     public Polygon create(int x, int y, int r1, int duration){
         // constants
-
-        int r2 = r1 + (r1*2);
-
+        final int r2 = r1 + (r1*2);
         double[][] points = new double[10][2];
 
+
+        // creer 10 points, 5 externes et 5 internes
         for(int xcont = 0; xcont < 10; xcont++){
             if((xcont % 2) == 0){
             points[xcont][0] = x + (r2 * Math.cos(Math.toRadians(90 + (72 * xcont))));
@@ -29,9 +27,9 @@ public class StarMaker {
             }
         }
 
-        // etoile
-        Polygon star = new Polygon(
 
+        // creer l'etoile
+        Polygon star = new Polygon(
                 points[0][0], points[0][1],
                 points[9][0], points[9][1],
                 points[8][0], points[8][1],
@@ -45,6 +43,7 @@ public class StarMaker {
         );
 
         star.setFill(Color.YELLOW);
+
 
         //fade transition
         FadeTransition fade = new FadeTransition(Duration.seconds(duration), star);

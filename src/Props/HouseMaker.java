@@ -7,88 +7,111 @@ import javafx.scene.shape.*;
 
 public class HouseMaker {
 
+    private int screenHeight, screenWidth;
+
+    public HouseMaker(int screenHeight, int screenWidth){
+        this.screenHeight = screenHeight;
+        this.screenWidth = screenWidth;
+    }
+
     public Group create(int x, int y, Color shadowcolor){
         //constant
-        int width = 210;
-        int height = 120;
-        int conection = 100;
+        final int width = (int)(this.screenWidth * 0.18);
+        final int height = (int)(this.screenHeight * 0.2);
+        final int heightToit = (int)(3 * height / 4);
+
+
         //mur
-        Rectangle mur = new Rectangle(x + 10,
-                y + conection,
-                width - 20,
+        Rectangle mur = new Rectangle(
+                x + (int)(width/10),
+                y + heightToit,
+                width - (int)(width/5),
                 height);
+
         mur.setFill(Color.BEIGE);
-        mur.setEffect(new DropShadow(10, -20, 20, shadowcolor));
+        mur.setEffect(new DropShadow(10, -(width / 5), (width / 10), shadowcolor));
+
 
         //fenetre
         Rectangle fenetre = new Rectangle(
                 x + (int)( width / 2),
-                y + conection + (int)(height / 4),
+                y + heightToit + (int)(height / 4),
                 (int)(width / 3),
                 (int)(height / 3)
                 );
+
         fenetre.setFill(Color.CYAN);
+
+
         //bars
-        Rectangle recbar = new Rectangle(
+        int girth = 3;
+
+        Rectangle perimetreFenetre = new Rectangle(
                 x + (int)( width / 2),
-                y + conection + (int)(height / 4),
+                y + heightToit + (int)(height / 4),
                 (int)(width / 3),
                 (int)(height / 3)
         );
 
-        int girth = 3;
-
-        recbar.setFill(Color.TRANSPARENT);
-        recbar.setStroke(Color.GRAY);
-        recbar.setStrokeWidth(girth);
+        perimetreFenetre.setFill(Color.TRANSPARENT);
+        perimetreFenetre.setStroke(Color.GRAY);
+        perimetreFenetre.setStrokeWidth(girth);
 
         Line bar1 = new Line(
                 x + (int)( width / 2) + girth,
-                (int)((y + conection + (height / 4)) + (height/6)),
+                (int)((y + heightToit + (height / 4)) + (height/6)),
                 x + (int)(5 * width / 6) - girth,
-                (int)((y + conection + (height / 4)) + (height/6))
+                (int)((y + heightToit + (height / 4)) + (height/6))
         );
+
         bar1.setStroke(Color.GRAY);
         bar1.setStrokeWidth(girth);
 
         Line bar2 = new Line(
                 (int)((x + ( width / 2)) + width/6),
-                y + conection + (int)(height / 4) + girth,
+                y + heightToit + (int)(height / 4) + girth,
                 (int)((x + ( width / 2)) + width/6),
-                y + conection +  (int)(7 * height / 12) - girth
+                y + heightToit +  (int)(7 * height / 12) - girth
         );
+
         bar2.setStroke(Color.GRAY);
         bar2.setStrokeWidth(girth);
 
-        Group fent = new Group(fenetre, recbar, bar1, bar2);
+        Group fenetreComplet = new Group(fenetre, perimetreFenetre, bar1, bar2);
+
+
         //toit
         Polygon toit = new Polygon(
-                x, y + conection,
-                x + width, y + conection,
+                x, y + heightToit,
+                x + width, y + heightToit,
                 x + (int)(width/2), y
                 );
+
         toit.setFill(Color.DARKRED);
-        toit.setEffect(new DropShadow(10, -20, 25, shadowcolor));
+        toit.setEffect(new DropShadow(10, -(width / 5), (width / 10) + 5, shadowcolor));
+
 
         //porte
         Rectangle port = new Rectangle(
                 x + (int)(width / 6),
-                y + conection + (int)(height/3.5),
+                y + heightToit + (int)(height/3.5),
                 (int)(width/4),
-                (int)(2.5 * height/3.5) + 1);
+                (int)(2.5 * height/3.5) + 1
+        );
+
         port.setFill(Color.SADDLEBROWN);
 
         Circle knob = new Circle(
                 x + (int)(5 * width / 14),
-                y + conection + (int)(3 * height/5),
+                y + heightToit + (int)(3 * height/5),
                 (int)(width / 18),
-                Color.YELLOWGREEN);
+                Color.YELLOWGREEN
+        );
 
         Group porte = new Group(port,knob);
-        //shadow
 
 
-        return new Group(toit, mur, porte, fent);
+        return new Group(toit, mur, porte, fenetreComplet);
     }
 
 }
